@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import CircleButton from '../elements/CircleButton';
 
-class MemoList extends React.Component {
+class MemoListScreen extends React.Component {
     render() {
         return (
             <View style={styles.memoList}>
@@ -29,6 +30,8 @@ class MemoList extends React.Component {
                     <Text style={styles.memoTitle}>講座のアイテム</Text>
                     <Text style={styles.memoDate}>2017/10/10</Text>
                 </View>
+
+                <CircleButton>+</CircleButton>
             </View>
         );
     }
@@ -55,4 +58,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default MemoList;
+export default MemoListScreen;
