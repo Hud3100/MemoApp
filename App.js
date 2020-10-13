@@ -4,7 +4,6 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import Appbar from './src/components/Appbar';
-import CircleButton from './src/elements/CircleButton';
 
 export default class App extends React.Component {
 	render() {
