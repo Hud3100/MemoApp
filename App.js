@@ -1,11 +1,13 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import firebase from 'firebase';
+require("firebase/firestore");
 
-import MemoListScreen from './src/screens/MemoListScreen'
+import LoginScreen from './src/screens/LoginScreen'
+import MemoCreateScreen from './src/screens/MemoCreateScreen'
 import MemoDetailScreen from './src/screens/MemoDetailScreen'
 import MemoEditScreen from './src/screens/MemoEditScreen'
-import LoginScreen from './src/screens/LoginScreen'
+import MemoListScreen from './src/screens/MemoListScreen'
 import SignupScreen from './src/screens/SignupScreen'
 
 import ENV from './env.json';
@@ -22,6 +24,7 @@ firebase.initializeApp(config);
 
 const App = createStackNavigator({
 	Login: 		{ screen: LoginScreen },
+	MemoCreate: { screen: MemoCreateScreen },
 	Signup: 	{ screen: SignupScreen },
 	Home: 		{ screen: MemoListScreen },
 	MemoDetail: { screen: MemoDetailScreen },
