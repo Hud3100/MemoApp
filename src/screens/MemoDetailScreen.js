@@ -2,24 +2,51 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import CircleButton from '../elements/CircleButton';
 
+const dateString = (date) => {
+    // 存在しない場合は空文字列を返すと安全です
+    if (date == null) { return ''; }
+    // firebaseのTimestamp型をDate型に変換する
+    const dateObject = date.toDate();
+    // Dateオブジェクトを文字列に変換する
+    return dateObject.toISOString().split('T')[0];
+};
+
 class MemoDetailScreen extends React.Component {
+    state = {
+        memo: {},
+    }
+
+    componentDidMount() {
+        const { params } = this.props.navigation.state;
+        this.setState({ memo: params.memo })
+    }
+
+    returnMemo(memo) {
+        this.setState({ memo })
+    }
+
     render(){
+            // FirebaseのTimestampを一般的な日付文字列にする関数
+
+        const { memo } = this.state;
         return(
             <View style={styles.container}>
                 <View style={styles.memoHeader}>
-                    <Text style={styles.memoHeaderTitle}>講座のアイデア</Text>
-                    <Text style={styles.memoHeaderDate}>2017/12/12</Text>
+                    <Text style={styles.memoHeaderTitle}>{memo.body ? memo.body.substring(0, 10) : ''}</Text>
+                    <Text style={styles.memoHeaderDate}>{dateString(memo.createdOn)}</Text>
                 </View>
 
                 <View style={styles.memoContent}>
-                    <Text>
-                        講座のアイデアです。
+                    <Text style={styles.memoBody}>
+                        {memo.body}
                     </Text>
                 </View>
 
                 <CircleButton
-                    name="pencil" color="white" style={styles.editButton}
-                    onPress={() => {this.props.navigation.navigate('MemoEdit')} }
+                    name="pencil"
+                    color="white"
+                    style={styles.editButton}
+                    onPress={() => {this.props.navigation.navigate('MemoEdit', { memo, returnMemo: this.returnMemo.bind(this) }); } }
                 />
             </View>
         );
@@ -54,6 +81,10 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         backgroundColor: '#fff',
         flex: 1,
+    },
+    memoBody: {
+        lineHeight: 22,
+        fontSize: 15,
     },
     editButton: {
         top: 75,
