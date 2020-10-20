@@ -22,12 +22,10 @@ class MemoDetailScreen extends React.Component {
     }
 
     returnMemo(memo) {
-        this.setState({ memo })
+        this.setState({ memo });
     }
 
     render(){
-            // FirebaseのTimestampを一般的な日付文字列にする関数
-
         const { memo } = this.state;
         return(
             <View style={styles.container}>
@@ -46,7 +44,7 @@ class MemoDetailScreen extends React.Component {
                     name="pencil"
                     color="white"
                     style={styles.editButton}
-                    onPress={() => {this.props.navigation.navigate('MemoEdit', { memo, returnMemo: this.returnMemo.bind(this) }); } }
+                    onPress={() => { this.props.navigation.navigate('MemoEdit', { memo, returnMemo: this.returnMemo.bind(this) }); }}
                 />
             </View>
         );
