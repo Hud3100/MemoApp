@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableHighlight } from 'react-native';
 
 import firebase from 'firebase';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 class SignUpScreen extends React.Component {
     state = {
@@ -12,10 +13,9 @@ class SignUpScreen extends React.Component {
     handleSubmit() {
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then((result) => {
-                this.props.navigation.navigate('Home');
+                const resetAction = StackActions.reset({ index: 0, actions: [NavigationActions.navigate({ routeName: 'Home' })], }); this.props.navigation.dispatch(resetAction);
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
             });
     }
 
